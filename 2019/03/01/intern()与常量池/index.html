@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>7Kil&#39;s blogs</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_859455_eaq7v6w8ktj.css">
+
+    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("h9oL9OCKDdCDx5ESi5xGH08r-gzGzoHsz", "bhJn6Y7XQkz2EB8RbJ8Gu35y");</script>
+
+</head>
+<body>
+<header class="header">
+    <div class="header-inner">
+        <div class="header-title">
+
+        </div>
+        <nav class="header-nav">
+            
+            <a href="/" class="header-nav-link">
+                首页
+            </a>
+            
+
+            
+            <a href="/archives" class="header-nav-link">
+                归档
+            </a>
+            
+
+            
+            <a href="/tags" class="header-nav-link">
+                标签
+            </a>
+            
+
+            
+            <a href="/about/" class="header-nav-link">
+                关于
+            </a>
+            
+        </nav>
+    </div>
+</header>
+<header class="mobile-header">
+    <div class="mobile-nav">
+        <div class="mobile-nav-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="mobile-nav-title">
+            <a href="/" class="mobile-nav-title-link">Four Stars's Blog</a>
+        </div>
+
+    </div>
+    <nav class="mobile-menu">
+        <ul class="mobile-menu-list">
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-home"></i>
+                <a href="/" class="mobile-nav-link">首页</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-archive"></i>
+                <a href="/archives" class="mobile-nav-link">归档</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-tag"></i>
+                <a href="/tags" class="mobile-nav-link">标签</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-about"></i>
+                <a href="/about/" class="mobile-nav-link">关于</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="main">
+    <div class="content-inner">
+        <div class="posts">
+    <article class="post-whole">
+        <div class="post-title">
+            <h2 class="title">intern()与常量池</h2>
+            <div class="post-meta">
+                <span class="post-time">2019-03-01</span>
+                
+                <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
+            </div>
+        </div>
+        <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#String中intern-与常量池"><span class="toc-text">String中intern()与常量池</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol>
+    <div class="back-to-top" id="back-to-top">
+        <a href="javascript:void(0);">回到顶部</a>
+    </div>
+</div>
+        <div class="post-content">
+            <p>本文介绍了调用intern()时的工作机制</p>
+<a id="more"></a>
+<h4 id="String中intern-与常量池"><a href="#String中intern-与常量池" class="headerlink" title="String中intern()与常量池"></a>String中intern()与常量池</h4><p>在《深入了解Java虚拟机》一书中，有这么一段代码来介绍常量池的工作方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String a = <span class="keyword">new</span> StringBuilder(<span class="string">"计算机"</span>).append(<span class="string">"软件"</span>).toString();</span><br><span class="line">    String b = <span class="keyword">new</span> StringBuilder(<span class="string">"ja"</span>).append(<span class="string">"va"</span>).toString();</span><br><span class="line"></span><br><span class="line">    System.out.println(a.intern() == a);</span><br><span class="line">    System.out.println(b.intern() == b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码运行结果为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">**Jdk1.6**</span><br><span class="line"><span class="keyword">false</span>   </span><br><span class="line"><span class="keyword">false</span>	</span><br><span class="line"></span><br><span class="line">**Jdk1.7**</span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">false</span></span><br></pre></td></tr></table></figure>
+<p>按照作者说的在Jdk1.6中，intern()方法会返回一个string object，当常量池中没有该字符串常量时(若有则直接返回常量池中的object)，会在方法区中(即常量池中)创建该常量的实例副本的同时返回object，且在堆上也创建一个相应的string object。</p>
+<p>堆上的和方法区的string object地址是不一致的，这就导致了<strong>a.intern() == a</strong>为false的结果，<strong>b.intern() == b</strong>同理。</p>
+<p>而在Jdk1.7中，常量池中无对应字符串常量时，则不会在常量池中创建新的string object，而是将堆上对应字符串的地址拷贝到常量池中，故<strong>a.intern() == a</strong>为true，按理说b也应该为true，但是实际却为false</p>
+<blockquote>
+<p>//new StringBuilder()和调用append()都会在堆上创建对象<br>//并在常量池中增加对应的String object<br>//toString则仅在堆上创建对象</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/006S5wgFgy1g18gt5lqxej30p20ge0sz.jpg" alt="Jdk1.7"></p>
+<p>那么为什么b调用后仍为false呢，根据<a href="http://http://baijiahao.baidu.com/s?id=1568390319555291" target="_blank" rel="noopener">《深入理解java虚拟机》String.intern()探究</a>一文可知</p>
+<p>System类中有这么运行了Version的init()方法，在该类中，有一个常量，其值为java，这就导致了我们常量池中，在调用b.intern()前就已经有了“java”这个string object，由于b是在堆中的，b.inern()实在常量池中的，两者地址不一致，故得到结果false。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Version</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String launcher_name = <span class="string">"java"</span>;</span><br><span class="line"> 	<span class="comment">//其他   </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a href="https://blog.csdn.net/soonfly/article/details/70147205" target="_blank" rel="noopener">几张图轻松理解String.intern()</a></p>
+
+        </div>
+        
+        <div class="post-tag">
+            
+            <a class="tag" href="/tags/常量池/" title="常量池">常量池</a>
+            
+        </div>
+        
+    </article>
+</div>
+<div class="paginator">
+    
+        
+            <a class="prev" href="/2019/04/01/Java集合框架/">
+                <i class="iconfont icon-prev"></i>
+                <span class="nav-default">Java Collection简介</span>
+                <span class="nav-mobile">上一篇</span>
+            </a>
+        
+        
+    
+</div>
+<div id="comment-container"></div>
+    </div>
+</div>
+<footer class="footer-social">
+    
+
+    
+
+    
+
+    <div class="footer-copyright">
+        <p class="time-line">
+            &copy;
+            
+            
+            2019
+            &nbsp;<i class="iconfont icon-heart"></i>&nbsp;
+            <a target="_blank" href="https://github.com/iJinxin">Four Stars</a>
+        </p>
+        <p class="theme-info">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme -
+            <a target="_blank" href="https://github.com/iJinxin/hexo-theme-sky">Sky</a>
+        </p>
+    </div>
+</footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    
+
+</script>
+</html>

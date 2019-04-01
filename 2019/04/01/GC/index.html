@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>7Kil&#39;s blogs</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_859455_eaq7v6w8ktj.css">
+
+    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("h9oL9OCKDdCDx5ESi5xGH08r-gzGzoHsz", "bhJn6Y7XQkz2EB8RbJ8Gu35y");</script>
+
+</head>
+<body>
+<header class="header">
+    <div class="header-inner">
+        <div class="header-title">
+
+        </div>
+        <nav class="header-nav">
+            
+            <a href="/" class="header-nav-link">
+                首页
+            </a>
+            
+
+            
+            <a href="/archives" class="header-nav-link">
+                归档
+            </a>
+            
+
+            
+            <a href="/tags" class="header-nav-link">
+                标签
+            </a>
+            
+
+            
+            <a href="/about/" class="header-nav-link">
+                关于
+            </a>
+            
+        </nav>
+    </div>
+</header>
+<header class="mobile-header">
+    <div class="mobile-nav">
+        <div class="mobile-nav-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="mobile-nav-title">
+            <a href="/" class="mobile-nav-title-link">Four Stars's Blog</a>
+        </div>
+
+    </div>
+    <nav class="mobile-menu">
+        <ul class="mobile-menu-list">
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-home"></i>
+                <a href="/" class="mobile-nav-link">首页</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-archive"></i>
+                <a href="/archives" class="mobile-nav-link">归档</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-tag"></i>
+                <a href="/tags" class="mobile-nav-link">标签</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-about"></i>
+                <a href="/about/" class="mobile-nav-link">关于</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="main">
+    <div class="content-inner">
+        <div class="posts">
+    <article class="post-whole">
+        <div class="post-title">
+            <h2 class="title">垃圾收集GC</h2>
+            <div class="post-meta">
+                <span class="post-time">2019-04-01</span>
+                
+                <span class="post-category">
+                    
+                    <a class="category" href="/categories/JVM/">JVM</a>
+                    
+                </span>
+                
+                <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
+            </div>
+        </div>
+        <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么要GC"><span class="toc-text">为什么要GC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#哪些内存需要回收"><span class="toc-text">哪些内存需要回收</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#判断内存是否需要回收"><span class="toc-text">判断内存是否需要回收</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方法区回收"><span class="toc-text">方法区回收</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#垃圾收集算法"><span class="toc-text">垃圾收集算法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tips"><span class="toc-text">Tips</span></a></li></ol>
+    <div class="back-to-top" id="back-to-top">
+        <a href="javascript:void(0);">回到顶部</a>
+    </div>
+</div>
+        <div class="post-content">
+            <p>本文介绍垃圾回收的以下方面</p>
+<ol>
+<li><p>何要GC</p>
+</li>
+<li><p>那些要回收</p>
+</li>
+<li><p>如何进行回收</p>
+</li>
+</ol>
+<a id="more"></a>
+<h4 id="为什么要GC"><a href="#为什么要GC" class="headerlink" title="为什么要GC"></a>为什么要GC</h4><p>每个Java程序分配的内存是有限的，当需要的内存超过分配的内存，会导致内存溢出，内存泄露等问题。</p>
+<p>因此我们需要释放一些不必要的资源，来维持程序的正常运行。</p>
+<h4 id="哪些内存需要回收"><a href="#哪些内存需要回收" class="headerlink" title="哪些内存需要回收"></a>哪些内存需要回收</h4><p>程序计数器，虚拟机栈，本地方法栈是线程私有的，线程执行完毕就GG了。其内存分配和回收在编译期就可确定，一般不考虑这些区域的回收问题。</p>
+<p>因此一般回收的是堆中，方法区中的内存。</p>
+<h5 id="判断内存是否需要回收"><a href="#判断内存是否需要回收" class="headerlink" title="判断内存是否需要回收"></a>判断内存是否需要回收</h5><p>一般来说，对象没有在任何地方被引用时，就说明这个对象已死，需要被回收。判断对象存活的算法有两种：引用计数算法，可达性分析算法。</p>
+<ol>
+<li><p>引用计数算法</p>
+<blockquote>
+<p>每个对象都有一个引用次数计数器，当有地方引用该对象时计数+1，引用失效时则-1</p>
+<p>为0时说明对象已死，需要被回收</p>
+<p>缺点：无法处理相互循环引用的问题(两对象相互引用，但是两对象都为null，但是计数器不为0)</p>
+</blockquote>
+</li>
+<li><p>可达性分析算法</p>
+<ul>
+<li>GC roots对象包括<ul>
+<li>虚拟机栈本地变量表中引用的对象</li>
+<li>本地方法栈Native方法中引用的对象</li>
+<li>方法区中的常量引用的对象，静态引用的对象</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>使用GC roots对象作为根节点，当有对象与roots之间有引用关系时，建立引用链连接双方。</p>
+<p>对象通过引用链来查询是否有roots，若无则说明引用可回收。</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li><p>回收策略</p>
+<p>   对象查询不到roots时，不会立即回收，而是对其进行第一次标记与筛选是否要执行finalize()方法。</p>
+<p>   筛选掉那些没有覆写finalize()方法或者已经调用过finalize()方法的对象。</p>
+<p>   筛选后，对象会被放置到F-Queue队列中，再由一个低优先级的线程去执行finalize()方法。</p>
+<p>   若在finalize()中，对象重新与roots建立引用链关系，则不会被回收。</p>
+</li>
+</ul>
+<ul>
+<li><p>缺点</p>
+<blockquote>
+<p>由于线程优先级低，很有可能对象已经被回收了还没执行finalize()方法。</p>
+<p>低优先级的原因是为了避免因finalize()方法过于耗时，导致F-Queue中的其他对象永久处于等待，最后引起内存回收崩溃。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>Tips</p>
+<p>由于finalize()运行代价高，不确定性大(在低优先级线程中运行)，一般通过try-finally替代。</p>
+</li>
+</ul>
+<h5 id="方法区回收"><a href="#方法区回收" class="headerlink" title="方法区回收"></a>方法区回收</h5><ol>
+<li><p>废弃常量</p>
+<p>常量池中字符若没有任何对象引用他，则成为废弃常量。</p>
+</li>
+<li><p>无用的类</p>
+<ul>
+<li>该类所有实例被回收</li>
+<li>加载该类的ClassLoader被回收</li>
+<li>对应的java.lang.Class对象没有被引用，无法通过反射访问该类方法</li>
+</ul>
+<p>满足上述条件就可以回收类，但不是必须回收。</p>
+</li>
+</ol>
+<h5 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h5><ol>
+<li><p>标记-清除算法</p>
+<ul>
+<li>标记，清除效率不高</li>
+<li>清除后可能产生大量空间碎片，导致缺少连续的大内存空间</li>
+</ul>
+</li>
+<li><p>复制算法</p>
+<p>内存分为两块，每次使用一块，进行清理时，讲存活的对象复制到空闲的内存块中，另一块执行完全清理。</p>
+<ul>
+<li>实现简单，运行高效</li>
+<li>不适合对象存活率高的情况(大量复制会降低效率)</li>
+</ul>
+<p>商用一般将方法区内存空间分为8：1：1，其中9份用于日常使用，当清理过后，将存活的对象复制到剩下的1份中。</p>
+<p>当这份空间不足以容纳存活对象时，则需要向其他内存(堆的老年代，新生代)进行借用。</p>
+</li>
+<li><p>标记-整理算法</p>
+<p>跟标记-清除类似，不同的是，回收时，存活对象向一端移动，同时清除端边界之外的内存，最后使得内存空间连续。</p>
+</li>
+<li><p>分代收集算法</p>
+<p>根据对象存活的周期，将堆内存分为新生代，老年代。</p>
+<ul>
+<li>新生代：对象存活周期短，选用复制算法</li>
+<li>老年代：存活率高，选用标记-清理或整理方法</li>
+</ul>
+<h4 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h4><p>永久代–&gt;方法区。</p>
+<p>堆包括方法区。</p>
+<p>堆分为新生代和老年代和永久代。</p>
+</li>
+</ol>
+
+        </div>
+        
+        <div class="post-tag">
+            
+            <a class="tag" href="/tags/GC/" title="GC">GC</a>
+            
+        </div>
+        
+    </article>
+</div>
+<div class="paginator">
+    
+        
+        
+            <a class="next" href="/2019/04/01/Java集合框架/">
+                <span class="nav-default">Java Collection简介</span>
+                <span class="nav-mobile">下一篇</span>
+                <i class="iconfont icon-next"></i>
+            </a>
+        
+    
+</div>
+<div id="comment-container"></div>
+    </div>
+</div>
+<footer class="footer-social">
+    
+
+    
+
+    
+
+    <div class="footer-copyright">
+        <p class="time-line">
+            &copy;
+            
+            
+            2019
+            &nbsp;<i class="iconfont icon-heart"></i>&nbsp;
+            <a target="_blank" href="https://github.com/iJinxin">Four Stars</a>
+        </p>
+        <p class="theme-info">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme -
+            <a target="_blank" href="https://github.com/iJinxin/hexo-theme-sky">Sky</a>
+        </p>
+    </div>
+</footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    
+
+</script>
+</html>
