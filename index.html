@@ -92,26 +92,13 @@
             </div>
             <div class="post-content">
                 
-                    <a id="more"></a>
-<ol>
-<li><p>ContentProvider用途</p>
-<ul>
-<li>不同应用间的数据交换</li>
-<li>可以提供接口供其他应用访问</li>
-<li>使用其他应用提供的接口进行数据读取</li>
-</ul>
-</li>
-<li><p>优点</p>
-<ul>
-<li><p>ContentProvider具有安全的数据交互环境，只会将特定的数据开放给其他应用访问</p>
-</li>
-<li><p>跨进程通信</p>
-</li>
-</ul>
-<p>文件，SharePreferences也能跨进程共享数据</p>
-</li>
-</ol>
-
+                    <p>介绍用途和优点</p>
+                    <div class="read-more">
+                        <a href="/2019/04/27/ContentProvider/" class="read-more-link">
+                            阅读全文
+                            <i class="iconfont icon-readmore"></i>
+                        </a>
+                    </div>
                 
             </div>
         </article>
@@ -160,7 +147,7 @@
     
         <article class="post-abstract">
             <div class="post-title">
-                <h2><a class="post-title-link" href="/2019/04/14/Broadcast/">广播注册方式，类型和区别</a></h2>
+                <h2><a class="post-title-link" href="/2019/04/14/Broadcast/">广播</a></h2>
             </div>
             <div class="post-meta">
                 <span class="post-time">2019-04-14</span>
@@ -168,36 +155,14 @@
             </div>
             <div class="post-content">
                 
-                    <a id="more"></a>
-<ol>
-<li>广播的注册方式<ul>
-<li>静态注册<ul>
-<li>在Manifest文件中进行配置，通过指定intent-filter来确定接收对应广播信息</li>
-<li>App首次启动时，该广播接收器会注册到系统中</li>
-<li>注册后一直存在，可持续接收广播，即使程序关闭也依旧可用</li>
-</ul>
-</li>
-<li>动态注册<ul>
-<li>通过Context.registerReceiver()方法进行注册，需配置intent-filter</li>
-<li>生命周期随组件的生命周期变化而变化</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>广播类型<ul>
-<li>普通广播：开发者自定义Intent的广播，若发送广播需要权限，那么接收器也需要对应权限</li>
-<li>系统广播：Android系统内置的广播，如监听网络变化，电量，开机等…</li>
-<li>有序广播：按照广播接收器的Priority属性：大-&gt;小进行接收，相同则动态注册优先，可拦截可修改</li>
-<li>本地广播：<ul>
-<li>exported = true时，其他应用的广播信息，只要intent-filter匹配，都可以接收，会影响本应用的接收效率。</li>
-<li>exported = false、发送或接收广播时，增加对应权限，用以验证本地应用的广播、指定接收广播的应用包名</li>
-<li>使用LocalBroadcastManager注册和接收广播</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-
+                    <p>注册方式，类型和区别</p>
+<p>介绍注册方式，类型和区别</p>
+                    <div class="read-more">
+                        <a href="/2019/04/14/Broadcast/" class="read-more-link">
+                            阅读全文
+                            <i class="iconfont icon-readmore"></i>
+                        </a>
+                    </div>
                 
             </div>
         </article>
@@ -215,6 +180,27 @@
                     <p>介绍Activity生命周期和启动模式</p>
                     <div class="read-more">
                         <a href="/2019/04/11/Activity周期和启动模式/" class="read-more-link">
+                            阅读全文
+                            <i class="iconfont icon-readmore"></i>
+                        </a>
+                    </div>
+                
+            </div>
+        </article>
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2019/04/01/Java集合框架/">Java Collection简介</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2019-04-01</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <p>Java集合的简单介绍</p>
+                    <div class="read-more">
+                        <a href="/2019/04/01/Java集合框架/" class="read-more-link">
                             阅读全文
                             <i class="iconfont icon-readmore"></i>
                         </a>
@@ -250,27 +236,6 @@
 </ol>
                     <div class="read-more">
                         <a href="/2019/04/01/GC/" class="read-more-link">
-                            阅读全文
-                            <i class="iconfont icon-readmore"></i>
-                        </a>
-                    </div>
-                
-            </div>
-        </article>
-    
-        <article class="post-abstract">
-            <div class="post-title">
-                <h2><a class="post-title-link" href="/2019/04/01/Java集合框架/">Java Collection简介</a></h2>
-            </div>
-            <div class="post-meta">
-                <span class="post-time">2019-04-01</span>
-                
-            </div>
-            <div class="post-content">
-                
-                    <p>Java集合的简单介绍</p>
-                    <div class="read-more">
-                        <a href="/2019/04/01/Java集合框架/" class="read-more-link">
                             阅读全文
                             <i class="iconfont icon-readmore"></i>
                         </a>
