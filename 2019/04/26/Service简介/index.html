@@ -80,97 +80,107 @@
 </header>
 <div class="main">
     <div class="content-inner">
-        <section class="archive">
+        <div class="posts">
+    <article class="post-whole">
+        <div class="post-title">
+            <h2 class="title"></h2>
+            <div class="post-meta">
+                <span class="post-time">2019-04-26</span>
+                
+                <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
+            </div>
+        </div>
+        <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">目录</strong>
     
-    <div class="archive-title tag">
-        <h2 class="archive-name">Java基础</h2>
+    <div class="back-to-top" id="back-to-top">
+        <a href="javascript:void(0);">回到顶部</a>
     </div>
-    
+</div>
+        <div class="post-content">
+            <ol>
+<li><p>Service启动方式</p>
+<ul>
+<li>Start：Context.startService()，启动后可无限制运行，在stopSelf()或者Context.stopService()后停止。</li>
+<li>Bind：Context.bindService()，应用组件和Service进行绑定，可进行交互，甚至进程间通信IPC一个Service可与多个组件进行绑定，当所有组件都unBindService()之后停止工作。</li>
+</ul>
+</li>
+<li><p>Service生命周期</p>
+<p><img src="https://github.com/hadyang/interview/raw/master/android/images/service_life.png" alt></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>Service分类</p>
+<ul>
+<li>本地服务：start启动的服务，在应用内进行工作，设置android:exported=false确保服务仅适用于本地应用程序</li>
+<li>远程服务：bind绑定的服务，扩展Binder在应用内工作，使用Messenger让接口跨不同的进程工作，AIDL使服务具备多线程处理能力，且线程安全。</li>
+<li>前台服务：在onCreate()中调用startforeground(int ,Notification)即可</li>
+<li>后台服务：一般情况下都是后台服务</li>
+</ul>
+</li>
+</ol>
+<ol start="4">
+<li><p>Service优先级</p>
+<ul>
+<li>前台进程：<ul>
+<li>有一个可交互的Activity</li>
+<li>Service与可交互的Activity绑定，或在前台运行，或正在执行生命周期</li>
+<li>BoardcastReceiver正在执行onReceive()</li>
+</ul>
+</li>
+<li>可见进程<ul>
+<li>Activity可见但不可交互</li>
+<li>Service与可见的Activity绑定</li>
+</ul>
+</li>
+<li>服务进程<ul>
+<li>有一个start运行的Service</li>
+</ul>
+</li>
+<li>后台进程<ul>
+<li>有一个不可见的Activity</li>
+</ul>
+</li>
+<li>空进程<ul>
+<li>进程中不含任何活跃的组件</li>
+</ul>
+</li>
+</ul>
+<p>保活</p>
+<ol>
+<li><p>设置为前台服务</p>
+</li>
+<li><p>在onStartConmand中返回Flags：START_STICKY，则服务在调用onStartConmand后被系统kill后会尝试重新启动服务。(进程被kill后就重建不了了)</p>
+</li>
+<li><p>在onDestory()中发送广播重新启动服务</p>
+</li>
+</ol>
+</li>
+</ol>
 
-    
-    
+        </div>
         
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-                
-            
-
-            
-        
-
-    
-        
-            
-            
-                
-            
-
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-                
-                    
-                
-            
-
-            
-                <div class="archive-post">
-                    <span class="archive-post-time">
-                    2019-04-01
-                    </span>
-                    <span class="archive-post-title">
-                        <a class="archive-post-link" href="/2019/04/01/Java集合框架/">Java Collection简介</a>
-                    </span>
-                </div>
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
+    </article>
+</div>
+<div class="paginator">
     
         
-            
-            
-
-            
+            <a class="prev" href="/2019/04/27/Broadcast/">
+                <i class="iconfont icon-prev"></i>
+                <span class="nav-default"></span>
+                <span class="nav-mobile">上一篇</span>
+            </a>
         
-
+        
+            <a class="next" href="/2019/04/26/Activity周期和启动模式/">
+                <span class="nav-default"></span>
+                <span class="nav-mobile">下一篇</span>
+                <i class="iconfont icon-next"></i>
+            </a>
+        
     
-</section>
+</div>
+<div id="comment-container"></div>
     </div>
 </div>
 <footer class="footer-social">

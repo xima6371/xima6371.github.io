@@ -80,97 +80,68 @@
 </header>
 <div class="main">
     <div class="content-inner">
-        <section class="archive">
+        <div class="posts">
+    <article class="post-whole">
+        <div class="post-title">
+            <h2 class="title"></h2>
+            <div class="post-meta">
+                <span class="post-time">2019-04-27</span>
+                
+                <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
+            </div>
+        </div>
+        <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">目录</strong>
     
-    <div class="archive-title tag">
-        <h2 class="archive-name">Java基础</h2>
+    <div class="back-to-top" id="back-to-top">
+        <a href="javascript:void(0);">回到顶部</a>
     </div>
-    
+</div>
+        <div class="post-content">
+            <ol>
+<li>强弱软虚四种引用的特点和使用场景 <ul>
+<li>强引用<ul>
+<li>Object o = new Object()诸如这样的都是强引用</li>
+<li>Java虚拟机宁可抛出OOM也不会回收强引用，除非引用失效</li>
+</ul>
+</li>
+<li>软引用<ul>
+<li>只要内存足够，GC不会对其进行回收，只有当内存不足时才回收</li>
+<li>打开多个网页，回退时，若还要重新联网获取，用户体验会差点，但是若一直缓存网页，内存耗费会很多，这时使用软引用的话，就会根据内存是否充足而进行回收了</li>
+</ul>
+</li>
+<li>弱引用<ul>
+<li>每次GC都会将其回收</li>
+<li>适用于那些生命周期短，耗费内存大的引用</li>
+</ul>
+</li>
+<li>虚引用<ul>
+<li>在任何时候都可能被回收</li>
+<li>虚引用必须和引用队列（ReferenceQueue）联合使用</li>
+<li>若虚引用已经进入引用队列，就可以在内存回收前采取必要行动</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 
-    
-    
+        </div>
         
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-                
-            
-
-            
-        
-
-    
-        
-            
-            
-                
-            
-
-            
-        
-
+    </article>
+</div>
+<div class="paginator">
     
         
-            
-            
-
-            
         
-
+            <a class="next" href="/2019/04/27/ContentProvider/">
+                <span class="nav-default"></span>
+                <span class="nav-mobile">下一篇</span>
+                <i class="iconfont icon-next"></i>
+            </a>
+        
     
-        
-            
-            
-                
-                    
-                
-            
-
-            
-                <div class="archive-post">
-                    <span class="archive-post-time">
-                    2019-04-01
-                    </span>
-                    <span class="archive-post-title">
-                        <a class="archive-post-link" href="/2019/04/01/Java集合框架/">Java Collection简介</a>
-                    </span>
-                </div>
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
-    
-</section>
+</div>
+<div id="comment-container"></div>
     </div>
 </div>
 <footer class="footer-social">

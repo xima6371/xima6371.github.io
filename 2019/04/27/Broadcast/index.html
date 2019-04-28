@@ -80,97 +80,76 @@
 </header>
 <div class="main">
     <div class="content-inner">
-        <section class="archive">
+        <div class="posts">
+    <article class="post-whole">
+        <div class="post-title">
+            <h2 class="title"></h2>
+            <div class="post-meta">
+                <span class="post-time">2019-04-27</span>
+                
+                <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
+            </div>
+        </div>
+        <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">目录</strong>
     
-    <div class="archive-title tag">
-        <h2 class="archive-name">Java基础</h2>
+    <div class="back-to-top" id="back-to-top">
+        <a href="javascript:void(0);">回到顶部</a>
     </div>
-    
+</div>
+        <div class="post-content">
+            <ol>
+<li>广播的注册方式<ul>
+<li>静态注册<ul>
+<li>在Manifest文件中进行配置，通过指定intent-filter来确定接收对应广播信息</li>
+<li>App首次启动时，该广播接收器会注册到系统中</li>
+<li>注册后一直存在，可持续接收广播，即使程序关闭也依旧可用</li>
+</ul>
+</li>
+<li>动态注册<ul>
+<li>通过Context.registerReceiver()方法进行注册，需配置intent-filter</li>
+<li>生命周期随组件的生命周期变化而变化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>广播类型<ul>
+<li>普通广播：开发者自定义Intent的广播，若发送广播需要权限，那么接收器也需要对应权限</li>
+<li>系统广播：Android系统内置的广播，如监听网络变化，电量，开机等…</li>
+<li>有序广播：按照广播接收器的Priority属性：大-&gt;小进行接收，相同则动态注册优先，可拦截可修改</li>
+<li>本地广播：<ul>
+<li>exported = true时，其他应用的广播信息，只要intent-filter匹配，都可以接收，会影响本应用的接收效率。</li>
+<li>exported = false、发送或接收广播时，增加对应权限，用以验证本地应用的广播、指定接收广播的应用包名</li>
+<li>使用LocalBroadcastManager注册和接收广播</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 
-    
-    
+        </div>
         
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-                
-            
-
-            
-        
-
-    
-        
-            
-            
-                
-            
-
-            
-        
-
+    </article>
+</div>
+<div class="paginator">
     
         
-            
-            
-
-            
+            <a class="prev" href="/2019/04/27/ContentProvider/">
+                <i class="iconfont icon-prev"></i>
+                <span class="nav-default"></span>
+                <span class="nav-mobile">上一篇</span>
+            </a>
         
-
+        
+            <a class="next" href="/2019/04/26/Service简介/">
+                <span class="nav-default"></span>
+                <span class="nav-mobile">下一篇</span>
+                <i class="iconfont icon-next"></i>
+            </a>
+        
     
-        
-            
-            
-                
-                    
-                
-            
-
-            
-                <div class="archive-post">
-                    <span class="archive-post-time">
-                    2019-04-01
-                    </span>
-                    <span class="archive-post-title">
-                        <a class="archive-post-link" href="/2019/04/01/Java集合框架/">Java Collection简介</a>
-                    </span>
-                </div>
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
-    
-        
-            
-            
-
-            
-        
-
-    
-</section>
+</div>
+<div id="comment-container"></div>
     </div>
 </div>
 <footer class="footer-social">
