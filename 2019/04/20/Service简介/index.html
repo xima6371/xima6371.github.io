@@ -83,9 +83,9 @@
         <div class="posts">
     <article class="post-whole">
         <div class="post-title">
-            <h2 class="title">Java引用分类</h2>
+            <h2 class="title">服务的前世今生</h2>
             <div class="post-meta">
-                <span class="post-time">2019-04-27</span>
+                <span class="post-time">2019-04-20</span>
                 
                 <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
             </div>
@@ -98,32 +98,65 @@
     </div>
 </div>
         <div class="post-content">
-            <p>介绍强软弱虚引用的特点和使用场景</p>
+            <p>介绍Service的启动方式及区别，以及如何保活</p>
 <a id="more"></a>
 <ol>
-<li>强弱软虚四种引用的特点和使用场景 <ul>
-<li>强引用<ul>
-<li>Object o = new Object()诸如这样的都是强引用</li>
-<li>Java虚拟机宁可抛出OOM也不会回收强引用，除非引用失效</li>
+<li><p>Service启动方式</p>
+<ul>
+<li>Start：Context.startService()，启动后可无限制运行，在stopSelf()或者Context.stopService()后停止。</li>
+<li>Bind：Context.bindService()，应用组件和Service进行绑定，可进行交互，甚至进程间通信IPC一个Service可与多个组件进行绑定，当所有组件都unBindService()之后停止工作。</li>
 </ul>
 </li>
-<li>软引用<ul>
-<li>只要内存足够，GC不会对其进行回收，只有当内存不足时才回收</li>
-<li>打开多个网页，回退时，若还要重新联网获取，用户体验会差点，但是若一直缓存网页，内存耗费会很多，这时使用软引用的话，就会根据内存是否充足而进行回收了</li>
+<li><p>Service生命周期</p>
+<p><img src="https://github.com/hadyang/interview/raw/master/android/images/service_life.png" alt></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>Service分类</p>
+<ul>
+<li>本地服务：start启动的服务，在应用内进行工作，设置android:exported=false确保服务仅适用于本地应用程序</li>
+<li>远程服务：bind绑定的服务，扩展Binder在应用内工作，使用Messenger让接口跨不同的进程工作，AIDL使服务具备多线程处理能力，且线程安全。</li>
+<li>前台服务：在onCreate()中调用startforeground(int ,Notification)即可</li>
+<li>后台服务：一般情况下都是后台服务</li>
 </ul>
 </li>
-<li>弱引用<ul>
-<li>每次GC都会将其回收</li>
-<li>适用于那些生命周期短，耗费内存大的引用</li>
+</ol>
+<ol start="4">
+<li><p>Service优先级</p>
+<ul>
+<li>前台进程：<ul>
+<li>有一个可交互的Activity</li>
+<li>Service与可交互的Activity绑定，或在前台运行，或正在执行生命周期</li>
+<li>BoardcastReceiver正在执行onReceive()</li>
 </ul>
 </li>
-<li>虚引用<ul>
-<li>在任何时候都可能被回收</li>
-<li>虚引用必须和引用队列（ReferenceQueue）联合使用</li>
-<li>若虚引用已经进入引用队列，就可以在内存回收前采取必要行动</li>
+<li>可见进程<ul>
+<li>Activity可见但不可交互</li>
+<li>Service与可见的Activity绑定</li>
+</ul>
+</li>
+<li>服务进程<ul>
+<li>有一个start运行的Service</li>
+</ul>
+</li>
+<li>后台进程<ul>
+<li>有一个不可见的Activity</li>
+</ul>
+</li>
+<li>空进程<ul>
+<li>进程中不含任何活跃的组件</li>
 </ul>
 </li>
 </ul>
+<p>保活</p>
+<ol>
+<li><p>设置为前台服务</p>
+</li>
+<li><p>在onStartConmand中返回Flags：START_STICKY，则服务在调用onStartConmand后被系统kill后会尝试重新启动服务。(进程被kill后就重建不了了)</p>
+</li>
+<li><p>在onDestory()中发送广播重新启动服务</p>
+</li>
+</ol>
 </li>
 </ol>
 
@@ -131,7 +164,7 @@
         
         <div class="post-tag">
             
-            <a class="tag" href="/tags/Java基础/" title="Java基础">Java基础</a>
+            <a class="tag" href="/tags/Service/" title="Service">Service</a>
             
         </div>
         
@@ -140,15 +173,15 @@
 <div class="paginator">
     
         
-            <a class="prev" href="/2019/04/27/ContentProvider/">
+            <a class="prev" href="/2019/04/27/强弱软虚四种引用的特点和使用场景/">
                 <i class="iconfont icon-prev"></i>
-                <span class="nav-default">内容提供者简介</span>
+                <span class="nav-default">Java引用分类</span>
                 <span class="nav-mobile">上一篇</span>
             </a>
         
         
-            <a class="next" href="/2019/04/20/Service简介/">
-                <span class="nav-default">服务的前世今生</span>
+            <a class="next" href="/2019/04/14/Broadcast/">
+                <span class="nav-default">广播注册方式，类型和区别</span>
                 <span class="nav-mobile">下一篇</span>
                 <i class="iconfont icon-next"></i>
             </a>

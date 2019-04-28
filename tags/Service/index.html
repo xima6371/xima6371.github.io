@@ -80,66 +80,107 @@
 </header>
 <div class="main">
     <div class="content-inner">
-        <div class="posts">
-    <article class="post-whole">
-        <div class="post-title">
-            <h2 class="title"></h2>
-            <div class="post-meta">
-                <span class="post-time">2019-04-26</span>
-                
-                <span class="post-visit"> 阅读次数：<span id="busuanzi_value_page_pv"></span></span>
-            </div>
-        </div>
-        <div class="post-toc" id="post-toc">
-    <strong class="post-toc-title">目录</strong>
+        <section class="archive">
     
-    <div class="back-to-top" id="back-to-top">
-        <a href="javascript:void(0);">回到顶部</a>
+    <div class="archive-title tag">
+        <h2 class="archive-name">Service</h2>
     </div>
-</div>
-        <div class="post-content">
-            <ol>
-<li>Activity生命周期描述<ul>
-<li>onCreate()：Activity实例被创建，加载布局资源和初始化操作</li>
-<li>onStart()：注册BoardReceiver监测UI变化，进入前台，可见但不可交互。</li>
-<li>onResume()：可见且可交互</li>
-<li>onPause()：存储持久性数据，停止动画，释放系统资源(广播接收器等)以及一些耗电耗费CPU的内容，避免耗时操作，影响用户体验，可见，不可交互。</li>
-<li>onStop()：完全不可见，进行比较耗费cpu的资源操作</li>
-<li>onDestroy()：调用finish()或者点击返回时回调，释放所有资源。</li>
-</ul>
-</li>
-<li>Activity四种启动模式<ul>
-<li>Standard：每次启动Activity都会创建一个新的实例</li>
-<li>SingleTop：栈顶复用，当栈中已经有该模式且处于栈顶的Activity存在时，再次启动该Activity不会创建新的实例，而是通过onNewIntent()复用之前的Activity。适用于收qq微信信息的activity</li>
-<li>SingleTask：栈内复用，任务栈中只能有一个该模式的Activity实例存在，当再次启动该Activity时，会将栈中位置处于该Activity之上的所有Activity出栈，并通过onNewIntent复用。适用于主页面</li>
-<li>SingleInstance：创建该模式的Activity会将其压入一个单独的任务栈中，且该任务栈有且只能有一个，一种Activity。</li>
-</ul>
-</li>
-</ol>
+    
 
-        </div>
-        
-    </article>
-</div>
-<div class="paginator">
+    
     
         
-            <a class="prev" href="/2019/04/26/Service简介/">
-                <i class="iconfont icon-prev"></i>
-                <span class="nav-default"></span>
-                <span class="nav-mobile">上一篇</span>
-            </a>
+            
+            
+                
+            
+
+            
         
-        
-            <a class="next" href="/2019/04/01/GC/">
-                <span class="nav-default">垃圾收集GC</span>
-                <span class="nav-mobile">下一篇</span>
-                <i class="iconfont icon-next"></i>
-            </a>
-        
+
     
-</div>
-<div id="comment-container"></div>
+        
+            
+            
+                
+            
+
+            
+        
+
+    
+        
+            
+            
+                
+            
+
+            
+        
+
+    
+        
+            
+            
+                
+            
+
+            
+        
+
+    
+        
+            
+            
+                
+            
+
+            
+        
+
+    
+        
+            
+            
+                
+                    
+                
+            
+
+            
+                <div class="archive-post">
+                    <span class="archive-post-time">
+                    2019-04-20
+                    </span>
+                    <span class="archive-post-title">
+                        <a class="archive-post-link" href="/2019/04/20/Service简介/">服务的前世今生</a>
+                    </span>
+                </div>
+            
+        
+
+    
+        
+            
+            
+                
+            
+
+            
+        
+
+    
+        
+            
+            
+                
+            
+
+            
+        
+
+    
+</section>
     </div>
 </div>
 <footer class="footer-social">
